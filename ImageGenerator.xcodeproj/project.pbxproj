@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		EAF2EB592DF9E2AE00845FB0 /* StableDiffusion in Frameworks */ = {isa = PBXBuildFile; productRef = EAF2EB582DF9E2AE00845FB0 /* StableDiffusion */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		EA6074232DF9AFB000CAB325 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -29,6 +33,24 @@
 		EA60742C2DF9AFB000CAB325 /* ImageGeneratorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageGeneratorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		EAF2EB562DF9E28400845FB0 /* Exceptions for "Models" folder in "ImageGenerator" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				merges.txt,
+				SafetyChecker.mlmodelc,
+				TextEncoder.mlmodelc,
+				Unet.mlmodelc,
+				UnetChunk1.mlmodelc,
+				UnetChunk2.mlmodelc,
+				VAEDecoder.mlmodelc,
+				VAEEncoder.mlmodelc,
+				vocab.json,
+			);
+			target = EA6074122DF9AFAF00CAB325 /* ImageGenerator */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		EA6074152DF9AFAF00CAB325 /* ImageGenerator */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -45,6 +67,14 @@
 			path = ImageGeneratorUITests;
 			sourceTree = "<group>";
 		};
+		EAF2EB432DF9E21500845FB0 /* Models */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				EAF2EB562DF9E28400845FB0 /* Exceptions for "Models" folder in "ImageGenerator" target */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAF2EB592DF9E2AE00845FB0 /* StableDiffusion in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +106,7 @@
 		EA60740A2DF9AFAF00CAB325 = {
 			isa = PBXGroup;
 			children = (
+				EAF2EB422DF9E20900845FB0 /* Resources */,
 				EA6074152DF9AFAF00CAB325 /* ImageGenerator */,
 				EA6074252DF9AFB000CAB325 /* ImageGeneratorTests */,
 				EA60742F2DF9AFB000CAB325 /* ImageGeneratorUITests */,
@@ -90,6 +122,14 @@
 				EA60742C2DF9AFB000CAB325 /* ImageGeneratorUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EAF2EB422DF9E20900845FB0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EAF2EB432DF9E21500845FB0 /* Models */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +152,7 @@
 			);
 			name = ImageGenerator;
 			packageProductDependencies = (
+				EAF2EB582DF9E2AE00845FB0 /* StableDiffusion */,
 			);
 			productName = ImageGenerator;
 			productReference = EA6074132DF9AFAF00CAB325 /* ImageGenerator.app */;
@@ -195,6 +236,9 @@
 			);
 			mainGroup = EA60740A2DF9AFAF00CAB325;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				EAF2EB572DF9E2AE00845FB0 /* XCRemoteSwiftPackageReference "ml-stable-diffusion" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = EA6074142DF9AFAF00CAB325 /* Products */;
 			projectDirPath = "";
@@ -558,6 +602,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EAF2EB572DF9E2AE00845FB0 /* XCRemoteSwiftPackageReference "ml-stable-diffusion" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/ml-stable-diffusion.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EAF2EB582DF9E2AE00845FB0 /* StableDiffusion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EAF2EB572DF9E2AE00845FB0 /* XCRemoteSwiftPackageReference "ml-stable-diffusion" */;
+			productName = StableDiffusion;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EA60740B2DF9AFAF00CAB325 /* Project object */;
 }
