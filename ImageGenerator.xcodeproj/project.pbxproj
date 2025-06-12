@@ -34,7 +34,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		EAF2EB562DF9E28400845FB0 /* Exceptions for "Models" folder in "ImageGenerator" target */ = {
+		EAF2EB9F2DF9FCCB00845FB0 /* Exceptions for "StableDiffusion" folder in "ImageGenerator" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				merges.txt,
@@ -67,12 +67,12 @@
 			path = ImageGeneratorUITests;
 			sourceTree = "<group>";
 		};
-		EAF2EB432DF9E21500845FB0 /* Models */ = {
+		EAF2EB952DF9FCA200845FB0 /* StableDiffusion */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				EAF2EB562DF9E28400845FB0 /* Exceptions for "Models" folder in "ImageGenerator" target */,
+				EAF2EB9F2DF9FCCB00845FB0 /* Exceptions for "StableDiffusion" folder in "ImageGenerator" target */,
 			);
-			path = Models;
+			path = StableDiffusion;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -127,7 +127,7 @@
 		EAF2EB422DF9E20900845FB0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				EAF2EB432DF9E21500845FB0 /* Models */,
+				EAF2EB952DF9FCA200845FB0 /* StableDiffusion */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
