@@ -16,7 +16,7 @@ struct PromptSheet : View {
     @Environment(\.dismiss) private var dismiss
     @State private var value = ""
     
-    var body : some View {
+    var body: some View {
         NavigationStack {
             VStack {
                 StyledTextArea(prompt, value: $value, autofocus: true)
@@ -47,27 +47,4 @@ struct PromptSheet : View {
         prompt: ImagePrompt.random(),
         onSubmit: { it in print(it) }
     )
-}
-
-
-
-struct TempContainer : View {
-    @State var showSheet = false
-    
-    var body: some View {
-        NavigationStack {
-            Button("Show Sheet") {
-                showSheet.toggle()
-            }.navigationTitle(Text("Image Prompt"))
-            
-        }.sheet(isPresented: $showSheet) {
-            PromptSheet(prompt: ImagePrompt.random()) { prompt in
-                print(prompt)
-            }.preferredColorScheme(.dark)
-        }
-    }
-}
-
-#Preview {
-    TempContainer()
 }
