@@ -106,11 +106,11 @@
 		EA60740A2DF9AFAF00CAB325 = {
 			isa = PBXGroup;
 			children = (
-				EAF2EB422DF9E20900845FB0 /* Resources */,
 				EA6074152DF9AFAF00CAB325 /* ImageGenerator */,
 				EA6074252DF9AFB000CAB325 /* ImageGeneratorTests */,
 				EA60742F2DF9AFB000CAB325 /* ImageGeneratorUITests */,
 				EA6074142DF9AFAF00CAB325 /* Products */,
+				EAF2EB422DF9E20900845FB0 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};

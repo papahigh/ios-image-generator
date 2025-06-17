@@ -11,8 +11,15 @@ import CoreGraphics
 import StableDiffusion
 
 
+struct Artifacts {
+    let images: [CGImage?]
+    let prompt: String
+    let negativePrompt: String
+}
+
+
 protocol ImageService {
-    func generateImage(prompt: String) throws -> CGImage?
+    func generateImages(prompt: String) throws -> Artifacts
 }
 
 
@@ -20,24 +27,22 @@ class LocalStableDiffusionService: ImageService {
     
     private let resourcesURL: URL
     private let computeUnits: MLComputeUnits
-    private let preferences: SettingsViewModel
+    private let preferences: Preferences
     
     init(
         resourcesURL: URL = Bundle.main.resourceURL!,
         computeUnits: MLComputeUnits = .cpuAndNeuralEngine,
-        preferences: SettingsViewModel
+        preferences: Preferences
     ) {
         self.resourcesURL = resourcesURL
         self.computeUnits = computeUnits
         self.preferences = preferences
     }
-    
-    func generateImage(prompt: String) throws -> CGImage? {
-        let pipeline = try getStableDiffusionPipeline()
-        let result = try pipeline.generateImages(
-            configuration: getPipelineConfig(of: prompt)
-        )
-        return result.first!
+
+    public func generateImages(prompt: String) throws -> Artifacts {
+        let config = getPipelineConfig(of: prompt)
+        let images = try getStableDiffusionPipeline().generateImages(configuration: config)
+        return Artifacts(images: images, prompt: config.prompt, negativePrompt: config.negativePrompt)
     }
     
     private func getStableDiffusionPipeline() throws -> StableDiffusionPipeline {
@@ -65,9 +70,17 @@ class LocalStableDiffusionService: ImageService {
         config.seed = UInt32.random(in: 0..<UInt32.max)
         config.stepCount = preferences.stepCount
         config.imageCount = preferences.imageCount
-        config.targetSize = preferences.imageSizeValue
-        config.originalSize = preferences.imageSizeValue
-        config.guidanceScale = preferences.guidanceScaleValue
+        config.targetSize = preferences.imageSize.toFloat32()
+        config.originalSize = preferences.imageSize.toFloat32()
+        config.guidanceScale = preferences.guidanceScale.toFloat32()
         return config
     }
+}
+
+fileprivate extension Int {
+    func toFloat32() -> Float32 { Float32(self)}
+}
+
+fileprivate extension Double {
+    func toFloat32() -> Float32 { Float32(self) }
 }

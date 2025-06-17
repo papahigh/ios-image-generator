@@ -35,8 +35,8 @@ fileprivate struct PrimaryButtonLabel: View {
             .frame(maxWidth: .infinity)
             .font(.headline)
             .foregroundColor(.white)
-            .background(Colors.primary)
-            .cornerRadius(Spacing.cornerRadius)
+            .background(.primary)
+            .cornerRadius(Spacing.md)
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  SettingsView.swift
+//  SettingsScreen.swift
 //  ImageGenerator
 //
 //  Created by Nikola P on 12.06.25.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct SettingsView: View {
+struct SettingsScreen: View {
     
     @EnvironmentObject var viewModel: SettingsViewModel
 
@@ -37,14 +37,15 @@ struct SettingsView: View {
                     guidanceScaleInput
                 }
                 resetSettingsButton
-                    .listRowBackground(Color(.systemGroupedBackground))
             }
             .toolbar {
                 ToolbarItem(placement: .keyboard) {
                     Spacer()
                 }
                 ToolbarItem(placement: .keyboard) {
-                    Button { focusState = nil } label: {
+                    Button {
+                        focusState = nil
+                    } label: {
                         Image(systemName: "keyboard.chevron.compact.down")
                     }
                 }
@@ -53,7 +54,6 @@ struct SettingsView: View {
         }
     }
     
-
     //
     // MARK: private
     
@@ -77,8 +77,11 @@ struct SettingsView: View {
                 label: { Text("Use negative prompt") },
             ).focused($focusState, equals: .useNegativePrompt)
             TextField("Negative Prompt", text: $viewModel.negativePromptText, axis: .vertical)
+                .foregroundStyle(
+                    !viewModel.useNegativePrompt ? .secondary : .primary)
                 .focused($focusState, equals: .negativePromptText)
                 .disabled(!viewModel.useNegativePrompt)
+
         } header: {
             Text("Negative Prompt")
         } footer: {
@@ -95,6 +98,7 @@ struct SettingsView: View {
                     .disabled(true)
             } label: {
                 Text("Image Count")
+                    .frame(width: 120, alignment: .leading)
             }
             Text("Number of images to generate")
                 .fontWeight(.thin)
@@ -111,6 +115,7 @@ struct SettingsView: View {
                     .keyboardType(.numberPad)
             } label: {
                 Text("Image Size")
+                    .frame(width: 120, alignment: .leading)
             }
             Text("Desired height and width of the generated image")
                 .fontWeight(.thin)
@@ -126,6 +131,7 @@ struct SettingsView: View {
                     .keyboardType(.numberPad)
             } label: {
                 Text("Step Count")
+                    .frame(width: 120, alignment: .leading)
             }
             Text("Number of inference steps to perform")
                 .fontWeight(.thin)
@@ -137,9 +143,10 @@ struct SettingsView: View {
         VStack(alignment: .leading) {
             HStack {
                 Text("Guidance Scale")
-                Text("\(viewModel.guidanceScale, specifier: "%.2f")").fontWeight(.thin)
+                Text("\(viewModel.guidanceScale, specifier: "%.2f")")
+                    .fontWeight(.thin)
             }
-            Slider(value: $viewModel.guidanceScale, in: 0...20, step: 0.5){
+            Slider(value: $viewModel.guidanceScale, in: 0...20, step: 0.5) {
                 Text("Guidance Scale")
             } minimumValueLabel: {
                 Text("0").fontWeight(.thin)
@@ -154,9 +161,9 @@ struct SettingsView: View {
     }
  
     private var resetSettingsButton: some View {
-        HStack(alignment: .center) {
+        HStack {
             Spacer()
-            Button("Reset Settings"){
+            Button("Reset Settings", role: .destructive){
                 viewModel.resetState()
             }
             Spacer()
@@ -166,7 +173,6 @@ struct SettingsView: View {
 
 
 #Preview {
-    SettingsView()
+    SettingsScreen()
         .environmentObject(SettingsViewModel())
 }
-

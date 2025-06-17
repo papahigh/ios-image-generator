@@ -8,25 +8,46 @@
 import SwiftUI
 import SwiftData
 
+
 @main
 struct ImageGeneratorApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    
+    let modelContainer: ModelContainer
+    let userPreferences: SettingsViewModel
+    let imageGallery: ImageGalleryViewModel
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ImageGeneratorTabs()
         }
-        .modelContainer(sharedModelContainer)
+        .environmentObject(userPreferences)
+        .environmentObject(imageGallery)
+        .modelContainer(modelContainer)
     }
+    
+    init() {
+        do {
+            modelContainer = try createContainer()
+            userPreferences = SettingsViewModel()
+            imageGallery = ImageGalleryViewModel(
+                imageService: LocalStableDiffusionService(preferences: userPreferences),
+                modelContext: modelContainer.mainContext
+            )
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+}
+
+
+fileprivate func createContainer() throws -> ModelContainer {
+    let schema = Schema([
+        ImageModel.self,
+    ])
+    return try ModelContainer(
+        for: schema,
+        configurations: [
+            ModelConfiguration(schema: schema, isStoredInMemoryOnly: false),
+        ]
+    )
 }

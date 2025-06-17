@@ -8,39 +8,35 @@
 import SwiftUI
 
 
-class SettingsViewModel : ObservableObject {
+class SettingsViewModel : ObservableObject, Preferences {
     
     @AppStorage("disable_safety")
-    var disableSafety: Bool = Defaults.DISABLE_SAFETY
+    public var disableSafety: Bool = Defaults.DISABLE_SAFETY
     
     @AppStorage("reduce_memory")
-    var reduceMemory: Bool = Defaults.REDUCE_MEMORY
+    public var reduceMemory: Bool = Defaults.REDUCE_MEMORY
     
     @AppStorage("step_count")
-    var stepCount: Int = Defaults.STEP_COUNT
+    public var stepCount: Int = Defaults.STEP_COUNT
     
     @AppStorage("image_count")
-    var imageCount: Int = Defaults.IMAGE_COUNT
+    public var imageCount: Int = Defaults.IMAGE_COUNT
     
     @AppStorage("image_size")
-    var imageSize: Int = Defaults.IMAGE_SIZE
-    
-    var imageSizeValue: Float32 { Float32(imageSize) }
+    public var imageSize: Int = Defaults.IMAGE_SIZE
     
     @AppStorage("guidance_scale")
-    var guidanceScale: Double = Defaults.GUIDANCE_SCALE
-    
-    var guidanceScaleValue: Float { Float(guidanceScale) }
+    public var guidanceScale: Double = Defaults.GUIDANCE_SCALE
     
     @AppStorage("use_negative_prompt")
-    var useNegativePrompt: Bool = Defaults.USE_NEGATIVE_PROMPT
-    
+    public var useNegativePrompt: Bool = Defaults.USE_NEGATIVE_PROMPT
+
     @AppStorage("negative_prompt_text")
-    var negativePromptText: String = Defaults.NEGATIVE_PROMPT_TEXT
+    public var negativePromptText: String = Defaults.NEGATIVE_PROMPT_TEXT
     
-    var negativePrompt: String { useNegativePrompt ? negativePromptText : "" }
+    public var negativePrompt: String { useNegativePrompt ? negativePromptText : "" }
     
-    func resetState() {
+    public func resetState() {
         disableSafety = Defaults.DISABLE_SAFETY
         reduceMemory = Defaults.REDUCE_MEMORY
         stepCount = Defaults.STEP_COUNT
@@ -51,7 +47,7 @@ class SettingsViewModel : ObservableObject {
         negativePromptText = Defaults.NEGATIVE_PROMPT_TEXT
     }
     
-    private struct Defaults {
+    public struct Defaults {
         static let DISABLE_SAFETY: Bool = true
         static let REDUCE_MEMORY: Bool = true
         static let STEP_COUNT: Int = 50

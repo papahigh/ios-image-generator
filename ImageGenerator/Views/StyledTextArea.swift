@@ -31,14 +31,10 @@ struct StyledTextArea : View {
             .textFieldStyle(.plain)
             .lineLimit(minLines...)
             .focused($isFocused)
-            .task {
+            .onAppear {
                 if autofocus {
                     isFocused = true
                 }
             }
     }
-}
-
-#Preview {
-    StyledTextArea("Hello", value: .constant(""))
 }
